@@ -112,7 +112,7 @@ Do not edit files until the user explicitly approves the contract. Read-only ins
 If the user revises requirements after approval, treat the old contract as superseded: draft a new contract and ask again before further edits.
 
 ## 4. Implementation
-Implement inline only for trivially small, single-file changes within the approved contract. For anything larger or multi-file, route bounded execution to @fixer and reconcile the results yourself.
+Implement inline only for trivially small, single-file changes within the approved contract. For anything larger or multi-file, route bounded execution to @fixer and reconcile the results yourself. Author your own planning and coordination artifacts — the plan/spec file, the contract, roadmaps, and short docs — inline yourself; never delegate writing the plan to @fixer. @fixer is for implementing code or analysis, not for authoring the plan.
 
 Delegation is the default for discovery, review, and bounded execution; you reconcile and stay the visible spine:
 - Use @explorer for broad codebase/data discovery.
