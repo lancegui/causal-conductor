@@ -25,7 +25,8 @@
           "structural-estimation",
           "predictive-modeling",
           "pre-analysis-plan",
-          "executing-analysis-plans"
+          "executing-analysis-plans",
+          "descriptive-evidence"
         ]
       },
       "oracle": {
@@ -39,6 +40,7 @@
           "causal-identification",
           "data-contracts",
           "data-preparation",
+          "descriptive-evidence",
           "executing-analysis-plans",
           "pre-analysis-plan",
           "predictive-modeling",
@@ -56,6 +58,7 @@
         "mcps": [],
         "skills": [
           "data-preparation",
+          "descriptive-evidence",
           "executing-analysis-plans",
           "predictive-modeling",
           "causal-identification",
