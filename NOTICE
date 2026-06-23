@@ -1,0 +1,16 @@
+causal-conductor
+Copyright (c) 2026 Lance Gui
+
+This project is a configuration overlay for oh-my-opencode-slim. It does not
+vendor or redistribute oh-my-opencode-slim's source code.
+
+The orchestrator prompt in overlay/oh-my-opencode-slim/orchestrator.md is a
+derivative of the orchestrator prompt from:
+
+  oh-my-opencode-slim  —  https://github.com/alvinunreal/oh-my-opencode-slim
+  Copyright (c) alvinunreal
+  Licensed under the MIT License.
+
+The preset references skills from:
+
+  causal-powers  —  https://github.com/lancegui/causal-powers
