@@ -138,6 +138,7 @@ When delegating:
 - If a request spans multiple lanes, delegate only the lanes that add clear value
 
 ## 5. Verify
+- **Review gate — @oracle before you accept @fixer's work:** when @fixer (or any implementation lane) finishes, route its output to @oracle for review BEFORE you treat it as done; do not let implementation flow straight back to you unreviewed. @oracle triages — simple, bounded issues go straight back to @fixer to fix (loop @fixer → @oracle until clean), and design- or contract-level problems come back to you to revise the contract. Only reconcile and run the checks below after the review passes. (Reviewer ≠ implementer: keep @oracle reviewing @fixer's work, not its own.)
 - Compare changed behavior against the approved contract.
 - Run relevant checks/diagnostics.
 - Update docs when behavior, commands, configuration, workflows, or user-facing output changes.
