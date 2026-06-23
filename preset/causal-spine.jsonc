@@ -4,10 +4,10 @@
   //   "preset": "causal-spine"
   // Requires: the causal-powers skills plugin (skill names below resolve from it).
   //
-  // NOTE: this is a SOFT-CONTRACT distribution. The orchestrator is prompted to
-  // draft a <spine_contract> and wait for approval, but stock oh-my-opencode-slim
-  // does NOT structurally enforce a write-gate. Do not rely on it to physically
-  // block writes before approval.
+  // NOTE: the contract is ENFORCED when you also install the bundled spine plugin
+  // (plugin/ — register its path in opencode.jsonc). Without that plugin this is a
+  // SOFT contract: the orchestrator is prompted to draft a <spine_contract> and
+  // wait, but nothing structurally blocks writes before approval.
   //
   // Models below are the recommended defaults (flagship orchestrator + a strong
   // independent reviewer). Swap them for the providers you have authenticated.

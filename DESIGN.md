@@ -47,10 +47,27 @@ runtime — no rebuild, no source fork. So:
 Users install **stock** oh-my-opencode-slim and keep its upstream updates; this
 overlay sits on top.
 
-## Soft contract (the one caveat)
+## Enforcement without a fork
 
-This overlay is **prompt-level only**. The orchestrator is *instructed* to draft a
-contract and wait for approval, but stock oh-my-opencode-slim does **not**
-structurally block writes before approval. A code-enforced write-gate exists but
-lives in a separate fork and is intentionally out of scope here — keeping the
-overlay fork-free is the trade.
+The prompt alone is a *soft* contract — the orchestrator is told to wait, but a
+prompt can't physically block a write. The hard guarantee lives in a small state
+machine + a hook:
+
+- **State machine** (`plugin/src/spine/`): `SpineState = { contract?, verified }`.
+  `canWrite` is false until a contract is approved; `canFinish` is false until
+  verification. Approval stamps the contract text with a `fingerprint` (drift
+  detection) and a timestamp.
+- **Gate** (`plugin/src/spine-hook.ts`, `tool.execute.before`): intercepts every
+  `edit`/`write`/`multi_edit` and mutating `bash`, and **throws** when
+  `!canWrite` — the write cannot execute.
+
+This used to require forking omo-slim (the gate is compiled code, not a config
+file). It doesn't anymore: the gate is a **standalone OpenCode plugin** shipped in
+`plugin/` and installed next to stock omo-slim. OpenCode runs *every* plugin's
+`tool.execute.before`, so the gate fires even though omo-slim itself has no spine.
+The plugin is parameterized by `shouldManageSession`, so it gates only the
+orchestrator session — identity it rebuilds from the `chat.message` stream, with
+no access to omo-slim internals.
+
+Soft mode remains a valid choice: skip installing the plugin and you get the
+prompt-only contract.

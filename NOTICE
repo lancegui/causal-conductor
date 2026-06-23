@@ -1,15 +1,19 @@
 causal-conductor
 Copyright (c) 2026 Lance Gui
 
-This project is a configuration overlay for oh-my-opencode-slim. It does not
-vendor or redistribute oh-my-opencode-slim's source code.
+This project is a configuration overlay plus a standalone plugin for
+oh-my-opencode-slim.
 
-The orchestrator prompt in overlay/oh-my-opencode-slim/orchestrator.md is a
-derivative of the orchestrator prompt from:
+The following are derived from / ported from oh-my-opencode-slim
+( https://github.com/alvinunreal/oh-my-opencode-slim , Copyright (c) alvinunreal,
+MIT License ):
 
-  oh-my-opencode-slim  —  https://github.com/alvinunreal/oh-my-opencode-slim
-  Copyright (c) alvinunreal
-  Licensed under the MIT License.
+  - overlay/oh-my-opencode-slim/orchestrator.md   (derivative of its orchestrator prompt)
+  - plugin/src/internal-initiator.ts              (ported, trimmed)
+  - plugin/src/types.ts                           (ported)
+
+The contract-spine state machine and hook (plugin/src/spine/, plugin/src/spine-hook.ts)
+are original work by the author, not part of oh-my-opencode-slim.
 
 The preset references skills from:
 

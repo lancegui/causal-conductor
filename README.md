@@ -37,13 +37,25 @@ causal-conductor changes the default path:
    waits for your approval, and verifies against it before finishing — delegation
    stays in the open, never a hidden background swarm.
 
-## ⚠️ Soft contract, not a hard write-gate
+## The contract is enforced (not just prompted)
 
-This overlay is **prompt-level only.** The orchestrator is *instructed* to present
-a contract and wait for approval, but stock omo-slim does **not** structurally
-block writes before you approve. Treat the contract as a strong convention, not an
-enforced gate. (A hard, code-enforced write-gate exists but lives in a separate
-fork; it is intentionally not part of this overlay.)
+This package ships the contract **two layers deep**:
+
+1. **Prompt** (`overlay/`) — the orchestrator drafts a `<spine_contract>` and is
+   told to wait for your approval.
+2. **Plugin** (`plugin/`, `causal-conductor-spine`) — a standalone OpenCode plugin
+   that **structurally blocks writes**. Its `tool.execute.before` hook throws on
+   any `edit`/`write`/`multi_edit` or mutating `bash` command until a contract is
+   approved (`canWrite`), and gates "finish" until verification. It installs
+   *next to* stock oh-my-opencode-slim — **no fork** — because OpenCode runs every
+   plugin's `tool.execute.before`, so this gate fires alongside omo-slim.
+
+The state machine: **no contract → writes blocked** → you approve → **writes
+allowed (scoped)** → `<spine_verified>passed</spine_verified>` → **finish allowed**.
+
+**Soft mode** is still available: skip step 3 of the installer (don't register the
+plugin) and you get the prompt-only contract — a strong convention without the
+hard gate. Installing the plugin makes it real.
 
 ## Requirements
 
@@ -64,13 +76,15 @@ cd causal-conductor
 
 `install.sh`:
 - copies the prompt overlay into `~/.config/opencode/oh-my-opencode-slim/`
-  (non-destructive — new files only), and
-- if you have **no** `oh-my-opencode-slim.jsonc` yet, installs the `causal-spine`
-  preset for you (one-command setup). If you already have one, it's left
-  untouched and the merge step is printed (safe JSONC auto-merge isn't attempted).
+  (non-destructive — new files only),
+- installs the `causal-spine` preset if you have no `oh-my-opencode-slim.jsonc`
+  yet (else prints the merge step), and
+- prints the one line to add to your `opencode.jsonc` `plugin` array to enable the
+  **enforced contract** (`plugin/` is pre-built — no build tool needed). Skip that
+  line for prompt-only / soft mode.
 
 Then edit the model ids in the preset to providers you've authenticated, and
-**restart OpenCode** — prompts and presets load at session start only.
+**restart OpenCode** — plugins, prompts, and presets load at session start only.
 
 See [DESIGN.md](DESIGN.md) for why it works this way.
 
@@ -81,10 +95,13 @@ See [DESIGN.md](DESIGN.md) for why it works this way.
 | `overlay/oh-my-opencode-slim/orchestrator.md` | `~/.config/opencode/oh-my-opencode-slim/orchestrator.md` | Replaces the orchestrator prompt (contract spine + recon-delegation) |
 | `overlay/oh-my-opencode-slim/causal-spine/orchestrator_append.md` | same path under `causal-spine/` | Appends the causal lane mapping (preset-scoped) |
 | `preset/causal-spine.jsonc` | merge into `oh-my-opencode-slim.jsonc` | Models, skills, MCP wiring for the 5 lanes |
+| `plugin/` (pre-built `dist/`) | register its path in `opencode.jsonc` `plugin` array | The enforced contract write-gate (`causal-conductor-spine`) |
 
-These rely on omo-slim's built-in prompt override (`loadAgentPrompt`):
+The prompt files rely on omo-slim's built-in prompt override (`loadAgentPrompt`):
 `{agent}.md` replaces an agent's prompt, `{preset}/{agent}_append.md` appends,
-both read from the config dir at runtime — no rebuild.
+both read from the config dir at runtime — no rebuild. The plugin is a standard
+standalone OpenCode plugin loaded next to omo-slim; its gate composes with
+omo-slim because OpenCode runs every plugin's `tool.execute.before`.
 
 ## How it works (the lanes)
 

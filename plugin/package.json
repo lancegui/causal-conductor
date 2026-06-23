@@ -1,0 +1,22 @@
+{
+  "name": "causal-conductor-spine",
+  "version": "0.1.0",
+  "description": "Contract-spine write-gate for oh-my-opencode-slim — a standalone OpenCode plugin that enforces approve-before-write without forking omo-slim.",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": ["dist", "src"],
+  "license": "MIT",
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target node --format esm --external @opencode-ai/plugin --external @opencode-ai/sdk",
+    "test": "bun test"
+  },
+  "peerDependencies": {
+    "@opencode-ai/plugin": ">=1.3.0"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.3.17"
+  }
+}
