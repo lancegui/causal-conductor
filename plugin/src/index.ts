@@ -68,6 +68,15 @@ export const CausalConductorSpine: Plugin = async () => {
       );
     },
 
+    // Flag a delegated subagent that returned nothing (likely failed) so the
+    // next write is gated — a failed subagent can't be silently treated as done.
+    'tool.execute.after': async (input, output) => {
+      await spine['tool.execute.after'](
+        input as Parameters<(typeof spine)['tool.execute.after']>[0],
+        output as Parameters<(typeof spine)['tool.execute.after']>[1],
+      );
+    },
+
     // Handle the /spine command.
     'command.execute.before': async (input, output) => {
       await spine.handleCommandExecuteBefore(

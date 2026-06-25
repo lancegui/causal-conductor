@@ -166,6 +166,7 @@ var WRITE_TOOLS = new Set([
   "MultiEdit"
 ]);
 var SHELL_TOOLS = new Set(["bash", "Bash"]);
+var TASK_TOOLS = new Set(["task", "Task"]);
 var MUTATING_SHELL_PATTERNS = [
   /(?:^|[;&|]\s*)(?:rm|mv|cp|mkdir|touch|chmod|chown|ln|tee|dd|truncate)\b/,
   /(?:^|[;&|]\s*)git\s+(?:rm|mv|restore|reset|clean)\b/,
@@ -334,6 +335,7 @@ function createSpineHook(options = {}) {
   const assistantMessageIDs = new Map;
   const userMessageIDs = new Map;
   const pendingContracts = new Map;
+  const pendingSubagentFailure = new Map;
   let shouldHandleCommand = false;
   function hasSessionID(sessionID) {
     return typeof sessionID === "string" && sessionID.length > 0;
@@ -375,6 +377,7 @@ function createSpineHook(options = {}) {
   function resetSession(sessionID) {
     store.reset(sessionID);
     pendingContracts.delete(sessionID);
+    pendingSubagentFailure.delete(sessionID);
   }
   function noteMessageID(registry, sessionID, messageID) {
     let ids = registry.get(sessionID);
@@ -425,6 +428,7 @@ function createSpineHook(options = {}) {
       }
       if (action === "reset") {
         store.reset(input.sessionID);
+        pendingSubagentFailure.delete(input.sessionID);
         output.parts.push(createInternalAgentTextPart("Contract spine reset. Writes are blocked until a new contract is approved."));
         return;
       }
@@ -468,6 +472,12 @@ function createSpineHook(options = {}) {
       if (!enabled) {
         return;
       }
+      if (TASK_TOOLS.has(input.tool)) {
+        if (hasSessionID(input.sessionID)) {
+          pendingSubagentFailure.delete(input.sessionID);
+        }
+        return;
+      }
       const isWriteTool = WRITE_TOOLS.has(input.tool);
       const command = typeof output.args?.command === "string" ? output.args.command : "";
       const isMutatingShell = SHELL_TOOLS.has(input.tool) && isObviousMutatingShellCommand(command);
@@ -478,8 +488,25 @@ function createSpineHook(options = {}) {
       if (!hasSessionID(sessionID) || !shouldManage(sessionID)) {
         return;
       }
+      const failure = pendingSubagentFailure.get(sessionID);
+      if (failure) {
+        throw new Error(`Contract spine blocked ${input.tool}: ${failure} — re-dispatch or handle the failure before further edits; do not treat a failed subagent as done.`);
+      }
       if (!store.canWrite(sessionID)) {
         throw new Error(`Contract spine blocked ${input.tool}: draft <spine_contract> and get explicit user approval before editing files.`);
+      }
+    },
+    "tool.execute.after": async (input, output) => {
+      if (!enabled || !TASK_TOOLS.has(input.tool)) {
+        return;
+      }
+      const sessionID = input.sessionID;
+      if (!hasSessionID(sessionID) || !shouldManage(sessionID)) {
+        return;
+      }
+      const result = typeof output.output === "string" ? output.output.trim() : "";
+      if (result.length === 0) {
+        pendingSubagentFailure.set(sessionID, "a delegated subagent returned no result (it likely failed)");
       }
     },
     event: async (input) => {
@@ -536,6 +563,7 @@ function createSpineHook(options = {}) {
         assistantMessageIDs.delete(sessionID);
         userMessageIDs.delete(sessionID);
         pendingContracts.delete(sessionID);
+        pendingSubagentFailure.delete(sessionID);
       }
     }
   };
@@ -571,6 +599,9 @@ var CausalConductorSpine = async () => {
     },
     "tool.execute.before": async (input, output) => {
       await spine["tool.execute.before"](input, output);
+    },
+    "tool.execute.after": async (input, output) => {
+      await spine["tool.execute.after"](input, output);
     },
     "command.execute.before": async (input, output) => {
       await spine.handleCommandExecuteBefore(input, output);

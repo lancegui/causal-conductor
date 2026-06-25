@@ -71,6 +71,20 @@ describe('plugin lifecycle integration', () => {
     expect(readdirSync(dir).length).toBe(1);
   });
 
+  test('a failed (empty) subagent gates the next write until re-dispatch (Fix #8)', async () => {
+    const h = await boot();
+    await approve(h);
+    await expect(gate(h, 'write')).resolves.toBeUndefined();
+    // subagent returns nothing → flagged via tool.execute.after wiring
+    await h['tool.execute.after'](
+      { tool: 'task', sessionID: SID, callID: 'c', args: {} },
+      { title: '', output: '', metadata: {} },
+    );
+    await expect(gate(h, 'write')).rejects.toThrow(/delegated subagent/i);
+    await gate(h, 'task'); // re-dispatch clears it
+    await expect(gate(h, 'write')).resolves.toBeUndefined();
+  });
+
   test('git branch flows but destructive git is gated, with no contract', async () => {
     const h = await boot();
     await expect(

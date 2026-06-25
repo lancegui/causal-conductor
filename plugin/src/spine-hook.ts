@@ -62,6 +62,7 @@ const WRITE_TOOLS = new Set([
   'MultiEdit',
 ]);
 const SHELL_TOOLS = new Set(['bash', 'Bash']);
+const TASK_TOOLS = new Set(['task', 'Task']);
 
 const MUTATING_SHELL_PATTERNS = [
   /(?:^|[;&|]\s*)(?:rm|mv|cp|mkdir|touch|chmod|chown|ln|tee|dd|truncate)\b/,
@@ -329,6 +330,9 @@ export function createSpineHook(options: SpineHookOptions = {}) {
   const assistantMessageIDs = new Map<string, Set<string>>();
   const userMessageIDs = new Map<string, Set<string>>();
   const pendingContracts = new Map<string, string>();
+  // sessionID -> reason, set when a delegated subagent returned no result so the
+  // orchestrator can't silently treat a failed subagent as done (Fix #8).
+  const pendingSubagentFailure = new Map<string, string>();
   let shouldHandleCommand = false;
 
   function hasSessionID(sessionID: string | undefined): sessionID is string {
@@ -397,6 +401,7 @@ export function createSpineHook(options: SpineHookOptions = {}) {
   function resetSession(sessionID: string): void {
     store.reset(sessionID);
     pendingContracts.delete(sessionID);
+    pendingSubagentFailure.delete(sessionID);
   }
 
   function noteMessageID(
@@ -476,6 +481,7 @@ export function createSpineHook(options: SpineHookOptions = {}) {
 
       if (action === 'reset') {
         store.reset(input.sessionID);
+        pendingSubagentFailure.delete(input.sessionID);
         output.parts.push(
           createInternalAgentTextPart(
             'Contract spine reset. Writes are blocked until a new contract is approved.',
@@ -552,6 +558,15 @@ export function createSpineHook(options: SpineHookOptions = {}) {
         return;
       }
 
+      // Dispatching a subagent is never a gated write, and re-dispatching is how
+      // the orchestrator addresses a prior subagent failure — clear the flag.
+      if (TASK_TOOLS.has(input.tool)) {
+        if (hasSessionID(input.sessionID)) {
+          pendingSubagentFailure.delete(input.sessionID);
+        }
+        return;
+      }
+
       const isWriteTool = WRITE_TOOLS.has(input.tool);
       const command =
         typeof output.args?.command === 'string' ? output.args.command : '';
@@ -567,9 +582,43 @@ export function createSpineHook(options: SpineHookOptions = {}) {
         return;
       }
 
+      // Fix #8: a delegated subagent came back empty (likely failed). Block the
+      // next write so a failed subagent can't be silently treated as done; the
+      // orchestrator must re-dispatch or handle it (which clears the flag).
+      const failure = pendingSubagentFailure.get(sessionID);
+      if (failure) {
+        throw new Error(
+          `Contract spine blocked ${input.tool}: ${failure} — re-dispatch or handle the failure before further edits; do not treat a failed subagent as done.`,
+        );
+      }
+
       if (!store.canWrite(sessionID)) {
         throw new Error(
           `Contract spine blocked ${input.tool}: draft <spine_contract> and get explicit user approval before editing files.`,
+        );
+      }
+    },
+
+    'tool.execute.after': async (
+      input: { tool: string; sessionID?: string },
+      output: { output?: unknown },
+    ): Promise<void> => {
+      if (!enabled || !TASK_TOOLS.has(input.tool)) {
+        return;
+      }
+      const sessionID = input.sessionID;
+      if (!hasSessionID(sessionID) || !shouldManage(sessionID)) {
+        return;
+      }
+      // Empty/whitespace output from a delegated subagent is the crisp,
+      // zero-false-positive signal that it returned nothing (an errored or
+      // empty-success subagent). Flag it so the next write is gated.
+      const result =
+        typeof output.output === 'string' ? output.output.trim() : '';
+      if (result.length === 0) {
+        pendingSubagentFailure.set(
+          sessionID,
+          'a delegated subagent returned no result (it likely failed)',
         );
       }
     },
@@ -646,6 +695,7 @@ export function createSpineHook(options: SpineHookOptions = {}) {
         assistantMessageIDs.delete(sessionID);
         userMessageIDs.delete(sessionID);
         pendingContracts.delete(sessionID);
+        pendingSubagentFailure.delete(sessionID);
       }
     },
   };
