@@ -62,7 +62,8 @@
           "result-verification",
           "structural-estimation",
           "using-causal-powers",
-          "wrong-number-debugging"
+          "wrong-number-debugging",
+          "just-enough"
         ]
       },
       "fixer": {
