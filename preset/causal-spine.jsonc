@@ -67,7 +67,7 @@
       },
       "fixer": {
         "model": "openai/gpt-5.5",
-        "variant": "xhigh",
+        "variant": "medium",
         "mcps": [],
         // Execution lane — same model as the orchestrator, so it must carry the
         // execution discipline to match its depth on a delegated task. Added
