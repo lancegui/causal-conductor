@@ -8,13 +8,28 @@
 // The spine machinery (spine/, spine-hook.ts) is ported verbatim from
 // oh-my-opencode-slim; this file is the thin host wrapper.
 
+import { homedir } from 'node:os';
+import { join } from 'node:path';
 import type { Plugin } from '@opencode-ai/plugin';
 import { createSpineHook } from './spine-hook';
+import { SpineStateStore } from './spine';
 
 // Which agent's sessions to gate. omo-slim's orchestrator is the contract
 // owner; its internal name is "orchestrator". (If you rename the orchestrator's
 // display name, set CAUSAL_CONDUCTOR_GATED_AGENT to match.)
 const GATED_AGENT = process.env.CAUSAL_CONDUCTOR_GATED_AGENT ?? 'orchestrator';
+
+// Where approved-contract state is persisted so a restart/reload does not drop
+// it and force re-approval. Defaults to OpenCode's data dir; override with
+// CAUSAL_CONDUCTOR_SPINE_DIR.
+function resolveSpineDir(): string {
+  if (process.env.CAUSAL_CONDUCTOR_SPINE_DIR) {
+    return process.env.CAUSAL_CONDUCTOR_SPINE_DIR;
+  }
+  const dataHome =
+    process.env.XDG_DATA_HOME ?? join(homedir(), '.local', 'share');
+  return join(dataHome, 'opencode', 'storage', 'spine');
+}
 
 export const CausalConductorSpine: Plugin = async () => {
   // session -> agent, rebuilt from the chat stream (no omo-slim internals).
@@ -24,6 +39,7 @@ export const CausalConductorSpine: Plugin = async () => {
     enabled: true,
     shouldManageSession: (sessionID) =>
       sessionAgent.get(sessionID) === GATED_AGENT,
+    store: new SpineStateStore({ dir: resolveSpineDir() }),
   });
 
   return {

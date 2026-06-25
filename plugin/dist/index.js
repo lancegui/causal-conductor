@@ -1,3 +1,7 @@
+// src/index.ts
+import { homedir } from "node:os";
+import { join as join2 } from "node:path";
+
 // src/spine/fingerprint.ts
 import { createHash } from "node:crypto";
 function normalizeContractText(text) {
@@ -12,6 +16,13 @@ function fingerprintContractText(text) {
   return createHash("sha256").update(normalizeContractText(text)).digest("hex");
 }
 // src/spine/state.ts
+import {
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync
+} from "node:fs";
+import { join } from "node:path";
 function createSpineState() {
   return { verified: false };
 }
@@ -48,32 +59,80 @@ function resetSpineState() {
 
 class SpineStateStore {
   states = new Map;
+  dir;
+  constructor(options = {}) {
+    this.dir = options.dir;
+    if (this.dir) {
+      try {
+        mkdirSync(this.dir, { recursive: true });
+      } catch {
+        this.dir = undefined;
+      }
+    }
+  }
+  fileFor(sessionID) {
+    const safe = sessionID.replace(/[^A-Za-z0-9._-]/g, "_");
+    return join(this.dir, `${safe}.json`);
+  }
+  load(sessionID) {
+    if (!this.dir) {
+      return;
+    }
+    try {
+      const raw = readFileSync(this.fileFor(sessionID), "utf8");
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed.verified === "boolean") {
+        return parsed;
+      }
+    } catch {}
+    return;
+  }
+  persist(sessionID, state) {
+    if (!this.dir) {
+      return;
+    }
+    try {
+      writeFileSync(this.fileFor(sessionID), JSON.stringify(state));
+    } catch {}
+  }
+  removeFile(sessionID) {
+    if (!this.dir) {
+      return;
+    }
+    try {
+      rmSync(this.fileFor(sessionID), { force: true });
+    } catch {}
+  }
   get(sessionID) {
     const existing = this.states.get(sessionID);
     if (existing) {
       return existing;
     }
-    const state = createSpineState();
+    const state = this.load(sessionID) ?? createSpineState();
     this.states.set(sessionID, state);
     return state;
   }
   approve(sessionID, text, now = Date.now()) {
     const state = approveContract(this.get(sessionID), text, now);
     this.states.set(sessionID, state);
+    this.persist(sessionID, state);
     return state;
   }
   markVerified(sessionID) {
     const state = markVerified(this.get(sessionID));
     this.states.set(sessionID, state);
+    this.persist(sessionID, state);
     return state;
   }
   reset(sessionID) {
     const state = resetSpineState();
     this.states.set(sessionID, state);
+    this.removeFile(sessionID);
     return state;
   }
   delete(sessionID) {
     this.states.delete(sessionID);
+    this.removeFile(sessionID);
   }
   canWrite(sessionID) {
     return canWrite(this.get(sessionID));
@@ -109,14 +168,15 @@ var WRITE_TOOLS = new Set([
 var SHELL_TOOLS = new Set(["bash", "Bash"]);
 var MUTATING_SHELL_PATTERNS = [
   /(?:^|[;&|]\s*)(?:rm|mv|cp|mkdir|touch|chmod|chown|ln|tee|dd|truncate)\b/,
-  /(?:^|[;&|]\s*)git\s+(?:rm|mv|restore|reset|clean|checkout|switch|commit|merge|cherry-pick|stash)\b/,
+  /(?:^|[;&|]\s*)git\s+(?:rm|mv|restore|reset|clean)\b/,
+  /(?:^|[;&|]\s*)git\s+checkout\b[^;&|]*\s(?:--|\.)(?:\s|$)/,
   /(?:^|[;&|]\s*)sed\b[^;&|]*\s-i(?:\b|['"])/,
   /(?:^|[;&|]\s*)perl\s+[^;&|]*\s-pi(?:\s|$)/,
   /(?:^|[;&|]\s*)(?:npm|pnpm|yarn|bun)\s+(?:install|add|remove|update|upgrade)\b/,
-  /(?:^|[^<>])(?:>>?|&>|2>|1>)\s*\S+/
+  /(?:^|[^<>])(?:>>?|&>|2>|1>)\s*(?!&)(?!\/dev\/(?:null|stdout|stderr)\b)\S+/
 ];
 var SPINE_CONTRACT_REMINDER = "<internal_reminder>Contract spine: no approved contract is active. Read, inspect, and ask questions as needed. Before editing files, propose a short <spine_contract> with Goal, Scope, Out of scope, and Acceptance check, then wait for explicit user approval.</internal_reminder>";
-var SPINE_IMPLEMENT_REMINDER = "<internal_reminder>Contract spine: an approved contract is active. Keep edits inside that contract. Before claiming completion, verify the work semantically against the contract and emit <spine_verified>passed</spine_verified> only after it passes.</internal_reminder>";
+var SPINE_IMPLEMENT_REMINDER = "<internal_reminder>Contract spine: an approved contract is active. Keep edits inside that contract. Before claiming completion, verify the work semantically against the contract AND confirm every named deliverable (file, figure, table, output) actually exists on disk — list/stat the paths and check they are non-empty; do not infer existence from a clean run. Emit <spine_verified>passed</spine_verified> only after both the semantic check and the on-disk deliverable check pass.</internal_reminder>";
 var SPINE_FINISH_REMINDER = "<internal_reminder>Contract spine: the approved contract has been verified. A final response may summarize the outcome, checks, and any remaining risk concisely.</internal_reminder>";
 function textParts(message) {
   return message.parts.filter((part) => part.type === "text" && typeof part.text === "string").map((part) => part.text ?? "");
@@ -185,16 +245,16 @@ function classifyUserIntent(text) {
   if (!normalized) {
     return "unknown";
   }
-  if (/\b(cancel|reset|stop|never mind|nevermind)\b/.test(normalized)) {
+  if (/\b(cancel|reset|stop|never mind|nevermind|scrap that|start over)\b/.test(normalized)) {
     return "cancel";
   }
-  const hasRevisionSignal = /\b(but|except|change|revise|modify|instead|add|also|include|remove|different|new requirement)\b/.test(normalized);
-  const hasApprovalSignal = /^(y|yes|ok|okay|approved|approve|go ahead|proceed|do it|implement this|ship it|looks good)$/.test(normalized) || /\b(approved|approve|go ahead|proceed|implement this)\b/.test(normalized);
-  if (hasRevisionSignal) {
-    return "revise";
-  }
+  const hasApprovalSignal = /^(y|yes|yep|yeah|ok|okay|approved?|sure|sounds good|go ahead|proceed|do it|implement this|ship it|looks good|lgtm)\b/.test(normalized) || /\b(approved?|go ahead|proceed|implement this|ship it|lgtm|looks good)\b/.test(normalized);
   if (hasApprovalSignal) {
     return "approve";
+  }
+  const hasRevisionSignal = /\b(revise|rework|redo|different approach|new requirement)\b/.test(normalized) || /\bchange (the |your )?(plan|approach|scope|design|spec)\b/.test(normalized) || /\binstead of\b/.test(normalized);
+  if (hasRevisionSignal) {
+    return "revise";
   }
   if (normalized.includes("?")) {
     return "question";
@@ -263,7 +323,8 @@ function isObviousMutatingShellCommand(command) {
   if (!normalized) {
     return false;
   }
-  return MUTATING_SHELL_PATTERNS.some((pattern) => pattern.test(normalized));
+  const unquoted = normalized.replace(/'[^']*'/g, " '' ").replace(/"[^"]*"/g, ' "" ');
+  return MUTATING_SHELL_PATTERNS.some((pattern) => pattern.test(unquoted));
 }
 function createSpineHook(options = {}) {
   const enabled = options.enabled ?? true;
@@ -396,8 +457,6 @@ function createSpineHook(options = {}) {
         const intent = classifyUserIntent(getLastUserText(lastUserMessage));
         if (intent === "cancel") {
           resetSession(sessionID);
-        } else if (intent === "revise") {
-          resetSession(sessionID);
         } else if (intent === "approve") {
           approveLatestContract(sessionID, output.messages);
         }
@@ -460,7 +519,7 @@ function createSpineHook(options = {}) {
         const isUserPart = userMessageIDs.get(sessionID)?.has(part.messageID) === true;
         if (isUserPart && pendingContracts.has(sessionID)) {
           const intent = classifyUserIntent(part.text);
-          if (intent === "cancel" || intent === "revise") {
+          if (intent === "cancel") {
             resetSession(sessionID);
           } else if (intent === "approve") {
             approveLatestContract(sessionID);
@@ -484,11 +543,19 @@ function createSpineHook(options = {}) {
 
 // src/index.ts
 var GATED_AGENT = process.env.CAUSAL_CONDUCTOR_GATED_AGENT ?? "orchestrator";
+function resolveSpineDir() {
+  if (process.env.CAUSAL_CONDUCTOR_SPINE_DIR) {
+    return process.env.CAUSAL_CONDUCTOR_SPINE_DIR;
+  }
+  const dataHome = process.env.XDG_DATA_HOME ?? join2(homedir(), ".local", "share");
+  return join2(dataHome, "opencode", "storage", "spine");
+}
 var CausalConductorSpine = async () => {
   const sessionAgent = new Map;
   const spine = createSpineHook({
     enabled: true,
-    shouldManageSession: (sessionID) => sessionAgent.get(sessionID) === GATED_AGENT
+    shouldManageSession: (sessionID) => sessionAgent.get(sessionID) === GATED_AGENT,
+    store: new SpineStateStore({ dir: resolveSpineDir() })
   });
   return {
     config: async (input) => {

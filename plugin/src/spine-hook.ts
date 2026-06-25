@@ -65,18 +65,28 @@ const SHELL_TOOLS = new Set(['bash', 'Bash']);
 
 const MUTATING_SHELL_PATTERNS = [
   /(?:^|[;&|]\s*)(?:rm|mv|cp|mkdir|touch|chmod|chown|ln|tee|dd|truncate)\b/,
-  /(?:^|[;&|]\s*)git\s+(?:rm|mv|restore|reset|clean|checkout|switch|commit|merge|cherry-pick|stash)\b/,
+  // Genuinely destructive git (loses working-tree changes or history) stays
+  // gated. VCS *flow* — switch, commit, merge, cherry-pick, stash, branch-
+  // creating checkout -b — is NOT gated (Fix #5): "create a branch" the user
+  // asked for must flow without a contract.
+  /(?:^|[;&|]\s*)git\s+(?:rm|mv|restore|reset|clean)\b/,
+  // `git checkout` only when it discards paths (`-- <path>` or a bare `.`),
+  // never for branch create/switch (`checkout -b`, `checkout <branch>`).
+  /(?:^|[;&|]\s*)git\s+checkout\b[^;&|]*\s(?:--|\.)(?:\s|$)/,
   /(?:^|[;&|]\s*)sed\b[^;&|]*\s-i(?:\b|['"])/,
   /(?:^|[;&|]\s*)perl\s+[^;&|]*\s-pi(?:\s|$)/,
   /(?:^|[;&|]\s*)(?:npm|pnpm|yarn|bun)\s+(?:install|add|remove|update|upgrade)\b/,
-  /(?:^|[^<>])(?:>>?|&>|2>|1>)\s*\S+/,
+  // Redirect to a FILE is a mutation — but `>/dev/null`, `2>/dev/null`, and
+  // fd-dups like `2>&1` write nothing and must not trip the gate (Fix #5),
+  // since read-only git probes (`… >/dev/null`) are everywhere.
+  /(?:^|[^<>])(?:>>?|&>|2>|1>)\s*(?!&)(?!\/dev\/(?:null|stdout|stderr)\b)\S+/,
 ];
 
 export const SPINE_CONTRACT_REMINDER =
   '<internal_reminder>Contract spine: no approved contract is active. Read, inspect, and ask questions as needed. Before editing files, propose a short <spine_contract> with Goal, Scope, Out of scope, and Acceptance check, then wait for explicit user approval.</internal_reminder>';
 
 export const SPINE_IMPLEMENT_REMINDER =
-  '<internal_reminder>Contract spine: an approved contract is active. Keep edits inside that contract. Before claiming completion, verify the work semantically against the contract and emit <spine_verified>passed</spine_verified> only after it passes.</internal_reminder>';
+  "<internal_reminder>Contract spine: an approved contract is active. Keep edits inside that contract. Before claiming completion, verify the work semantically against the contract AND confirm every named deliverable (file, figure, table, output) actually exists on disk — list/stat the paths and check they are non-empty; do not infer existence from a clean run. Emit <spine_verified>passed</spine_verified> only after both the semantic check and the on-disk deliverable check pass.</internal_reminder>";
 
 export const SPINE_FINISH_REMINDER =
   '<internal_reminder>Contract spine: the approved contract has been verified. A final response may summarize the outcome, checks, and any remaining risk concisely.</internal_reminder>';
@@ -178,26 +188,40 @@ export function classifyUserIntent(text: string): UserIntent {
     return 'unknown';
   }
 
-  if (/\b(cancel|reset|stop|never mind|nevermind)\b/.test(normalized)) {
+  // Explicit cancel/reset always wins — this is the one path that clears state.
+  if (
+    /\b(cancel|reset|stop|never mind|nevermind|scrap that|start over)\b/.test(
+      normalized,
+    )
+  ) {
     return 'cancel';
   }
 
-  const hasRevisionSignal =
-    /\b(but|except|change|revise|modify|instead|add|also|include|remove|different|new requirement)\b/.test(
-      normalized,
-    );
+  // Approval is checked BEFORE revision (Fix #3). "approve, but tweak the
+  // wording later" or "yes, also add X" is an approval, not a contract reset —
+  // checking revise first used to steal these and leave writes blocked.
   const hasApprovalSignal =
-    /^(y|yes|ok|okay|approved|approve|go ahead|proceed|do it|implement this|ship it|looks good)$/.test(
+    /^(y|yes|yep|yeah|ok|okay|approved?|sure|sounds good|go ahead|proceed|do it|implement this|ship it|looks good|lgtm)\b/.test(
       normalized,
     ) ||
-    /\b(approved|approve|go ahead|proceed|implement this)\b/.test(normalized);
-
-  if (hasRevisionSignal) {
-    return 'revise';
-  }
-
+    /\b(approved?|go ahead|proceed|implement this|ship it|lgtm|looks good)\b/.test(
+      normalized,
+    );
   if (hasApprovalSignal) {
     return 'approve';
+  }
+
+  // Genuine revision of the plan/scope. Narrowed (Fix #3): bare
+  // add/also/include/change/remove are ordinary task instructions, NOT contract
+  // resets — only explicit "revise / rework / redo / change the plan" count.
+  const hasRevisionSignal =
+    /\b(revise|rework|redo|different approach|new requirement)\b/.test(
+      normalized,
+    ) ||
+    /\bchange (the |your )?(plan|approach|scope|design|spec)\b/.test(normalized) ||
+    /\binstead of\b/.test(normalized);
+  if (hasRevisionSignal) {
+    return 'revise';
   }
 
   if (normalized.includes('?')) {
@@ -284,7 +308,16 @@ export function isObviousMutatingShellCommand(command: string): boolean {
     return false;
   }
 
-  return MUTATING_SHELL_PATTERNS.some((pattern) => pattern.test(normalized));
+  // Blank out quoted substrings before scanning (Fix #6). Shell redirections
+  // and command verbs live OUTSIDE quotes; `>`/`>=` inside `Rscript -e '…'`,
+  // `awk '…'`, or `python -c "…"` are operators, not file writes, and a verb
+  // like `rm` inside a string is an argument, not a command. Scanning the raw
+  // string blocked read-only analysis one-liners (e.g. `info$size > 0`).
+  const unquoted = normalized
+    .replace(/'[^']*'/g, " '' ")
+    .replace(/"[^"]*"/g, ' "" ');
+
+  return MUTATING_SHELL_PATTERNS.some((pattern) => pattern.test(unquoted));
 }
 
 export function createSpineHook(options: SpineHookOptions = {}) {
@@ -494,9 +527,12 @@ export function createSpineHook(options: SpineHookOptions = {}) {
         }
 
         const intent = classifyUserIntent(getLastUserText(lastUserMessage));
+        // Sticky approval (Fix #2): once a contract is approved it stays active
+        // until the user EXPLICITLY cancels/resets. A "revise" follow-up no
+        // longer silently nukes the contract — that re-blocked writes mid-task
+        // and forced repeated re-approvals. Genuine scope changes are handled by
+        // drafting a fresh contract or running /spine reset.
         if (intent === 'cancel') {
-          resetSession(sessionID);
-        } else if (intent === 'revise') {
           resetSession(sessionID);
         } else if (intent === 'approve') {
           approveLatestContract(sessionID, output.messages);
@@ -590,7 +626,8 @@ export function createSpineHook(options: SpineHookOptions = {}) {
           userMessageIDs.get(sessionID)?.has(part.messageID) === true;
         if (isUserPart && pendingContracts.has(sessionID)) {
           const intent = classifyUserIntent(part.text);
-          if (intent === 'cancel' || intent === 'revise') {
+          // Sticky approval (Fix #2): only an explicit cancel clears state.
+          if (intent === 'cancel') {
             resetSession(sessionID);
           } else if (intent === 'approve') {
             approveLatestContract(sessionID);
