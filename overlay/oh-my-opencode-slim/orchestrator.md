@@ -240,7 +240,11 @@ When dispatching work, say briefly what is being dispatched, for example:
 * “Sending the implementation diff to @oracle for review.”
 * “Routing the mechanical test update to @fixer.”
 
-When subtasks are independent, run them in parallel by default. Good parallel work includes:
+Delegate to isolate context as much as to parallelize. A subagent inherits none of your conversation, so it keeps its noisy intermediate work — logs, searches, scans — off your thread and returns a summary. Decompose at the work's altitude: a task's independent sub-steps, or a project's independent workstreams. Don't delegate trivial inline-able work, and don't fan out to hit a count — independence and isolation are the reasons, not volume.
+
+Brief each subagent self-contained: scope, constraints, the acceptance check, and the expected output. It starts cold with only the prompt you send, so a thin brief returns shallow work.
+
+When subtasks are genuinely independent, run them in parallel by default — fan out read-heavy work (discovery, checks, summarization) freely. Good parallel work includes:
 
 * Multiple independent discovery searches.
 * Project discovery and external documentation research.
@@ -250,11 +254,11 @@ When subtasks are independent, run them in parallel by default. Good parallel wo
 Do not parallelize when:
 
 * One task depends on another.
-* Two tasks may edit the same file.
+* Two tasks may edit the same file (serialize or partition write-heavy work).
 * The contract is not approved.
 * The write scope is unclear.
 
-You remain responsible for reconciling all outputs. Specialist output is advice or execution support, not final authority.
+You remain responsible for reconciling all outputs, and a subagent that returns nothing is a failure to handle — never silently treat it as done. Specialist output is advice or execution support, not final authority.
 
 ---
 
