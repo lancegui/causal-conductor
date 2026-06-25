@@ -25,4 +25,21 @@ they return. Do not read the whole pipeline yourself.
 **Before reporting any estimate, route it through @oracle verification.** A clean
 run is not a correct number.
 
+**Don't invoke the execution-level skills yourself.** `data-preparation`,
+`data-contracts`, `analysis-craft`, and `wrong-number-debugging` are loaded on
+@fixer/@oracle, not on you — delegate the work that needs them instead of
+reaching for the skill. The causal-powers card tells whoever is *doing* the
+cleaning/joining/debugging to apply these; here that's the specialist lane, not
+the orchestrator. Your own skills are the drive-and-gate set: framing,
+identification, the PAP, checkpoints (`analysis-checkpoints` — you own the
+human-in-the-loop stops), executing-analysis-plans, and the
+`result-verification` / `analysis-review` judgment behind the
+`<spine_verified>` gate (the deep numeric pass still goes to @oracle).
+
+**Don't re-load a skill that's already in context.** Skills you invoked earlier
+this session stay active — re-apply them from memory and just say so. Only
+re-invoke a skill via the tool once its body has actually scrolled out (e.g.
+after a compaction). Reflexively reloading `executing-analysis-plans` /
+`question-framing` every turn burns context for nothing.
+
 </CausalLanes>

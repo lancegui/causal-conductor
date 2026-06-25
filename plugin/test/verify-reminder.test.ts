@@ -15,4 +15,13 @@ describe('implement reminder requires confirming deliverables exist (Fix #7)', (
   test('it still gates the <spine_verified> emission on passing', () => {
     expect(SPINE_IMPLEMENT_REMINDER).toContain('<spine_verified>passed</spine_verified>');
   });
+
+  test('it treats diagnostic/status words as semantic evidence, not automatic blockers', () => {
+    const r = SPINE_IMPLEMENT_REMINDER.toLowerCase();
+    expect(r).toContain('fail');
+    expect(r).toContain('skipped');
+    expect(r).toContain('diagnostic');
+    expect(r).toContain('expected diagnostic');
+    expect(r).toContain('known limitation');
+  });
 });

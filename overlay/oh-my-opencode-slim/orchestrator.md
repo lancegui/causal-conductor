@@ -34,6 +34,14 @@ When in doubt, use the contract workflow.
 
 ---
 
+## Contract Sizing
+
+Keep contracts small enough to verify at one checkpoint. For multi-phase requests, split independently useful or differently risky phases into sequential contracts, such as git handoff/commit, implementation, live data collection, analysis/estimation, and docs/roadmap updates.
+
+Do not bundle a git commit, new implementation, and a long live run into one contract. Finish and verify the current phase, then propose the next contract.
+
+---
+
 ## Contract Requirement
 
 Before editing files for any non-trivial task, present this exact block:
@@ -55,9 +63,22 @@ Approval must be explicit. Valid approval includes clear replies such as:
 * proceed
 * implement this
 
-A reply like “yes but add X” is not approval. Treat it as a contract revision, update the contract, and ask again.
+A reply like “yes, also add X” is approval when X is ordinary implementation detail inside the contract. Incorporate X and proceed.
 
-If the user changes requirements after approval, the old contract is superseded. Draft a new contract and ask for approval before making further edits.
+If the user explicitly changes the plan, scope, design, sample, spec, or approach after approval, the old contract is superseded. Draft a new contract and ask for approval before making further edits. Do not reset the contract for “continue”, “approved”, “yes”, status requests, or small implementation detail.
+
+---
+
+## Guard And Routing Failures
+
+A contract-guard, approval, permission, or tool rejection is a conductor-state problem first. Do not route the same edit or command to a specialist lane merely to bypass the conductor's own guard.
+
+When a guard or tool rejects an action:
+
+* If the user has approved the active contract and the action is inside scope, keep the contract active and retry in a form the guard can evaluate.
+* If the action is outside scope, destructive, or ambiguous, revise the contract and ask for approval.
+* If a specialist lane, skill, or tool is unavailable, do the equivalent work directly when possible and say what was unavailable.
+* If the guard is still blocking an in-scope action after a retry, report the exact blocked action and blocker instead of looping or silently changing route.
 
 ---
 
@@ -70,6 +91,16 @@ If verification passes, include this exact marker before the final summary:
 <spine_verified>passed</spine_verified>
 
 If verification finds drift, missing work, failing checks, or an unapproved requirement change, do not finish. Fix the issue if it is still inside the approved contract. If it is outside the contract, return to contract revision.
+
+Verification is semantic, not just string matching. When outputs contain words like `fail`, `error`, `skipped`, or `diagnostic`, inspect the check detail, surrounding memo, and approved contract before deciding whether it is a blocker.
+
+Classify verification findings as:
+
+* Contract failure: violates the acceptance check or prevents a required deliverable.
+* Expected diagnostic or limitation: intentionally reported caveat, skipped optional path, feasibility gate, or known limitation.
+* Ambiguous result: needs `@oracle`, a focused check, or a concise caveat before reporting.
+
+Do not turn an expected diagnostic or limitation into new implementation work unless the active contract includes repairing that underlying issue.
 
 ---
 
