@@ -18,11 +18,11 @@
         "model": "openai/gpt-5.5",
         "variant": "xhigh",
         "mcps": [],
-        // Full causal-powers set: the orchestrator is equipped to do any
-        // analysis step itself so it never hits a deny wall and can handle
-        // entangled work inline. Delegation stays the DEFAULT (see the
-        // orchestrator append) — having a skill is not a reason to do the work
-        // here when a clean brief to @fixer/@oracle would do.
+        // Full causal-powers set so the orchestrator UNDERSTANDS every
+        // discipline well enough to plan, write deep briefs, and verify — not so
+        // it does execution itself. Delegation (fan out to parallel @fixer /
+        // @oracle) is the default; inline work is the rare exception. See the
+        // orchestrator append.
         "skills": [
           "question-framing",
           "using-causal-powers",
