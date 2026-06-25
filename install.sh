@@ -23,8 +23,10 @@ fi
 # 1. Prompt overlay (always safe — new files in a dedicated subdir).
 mkdir -p "$DEST/causal-spine"
 cp "$SRC_DIR/overlay/oh-my-opencode-slim/orchestrator.md" "$DEST/orchestrator.md"
-cp "$SRC_DIR/overlay/oh-my-opencode-slim/causal-spine/orchestrator_append.md" "$DEST/causal-spine/orchestrator_append.md"
-echo "  ✓ prompt overlay (orchestrator.md + causal-spine/orchestrator_append.md)"
+# Copy every lane append (orchestrator, explorer, librarian, …) — not just one,
+# so adding a new <agent>_append.md needs no installer edit.
+cp "$SRC_DIR"/overlay/oh-my-opencode-slim/causal-spine/*_append.md "$DEST/causal-spine/"
+echo "  ✓ prompt overlay (orchestrator.md + $(ls "$SRC_DIR"/overlay/oh-my-opencode-slim/causal-spine/*_append.md | wc -l | tr -d ' ') lane appends)"
 
 # 2. Preset.
 if [ ! -f "$LITE_CONFIG" ]; then
