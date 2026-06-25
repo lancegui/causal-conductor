@@ -18,12 +18,11 @@
         "model": "openai/gpt-5.5",
         "variant": "xhigh",
         "mcps": [],
-        // Drive-and-gate skills only. Execution skills (data-preparation,
-        // data-contracts, analysis-craft, wrong-number-debugging) live on
-        // @fixer/@oracle and are delegated, not invoked here — see the
-        // orchestrator append. result-verification / analysis-review /
-        // analysis-checkpoints back the <spine_verified> gate and the
-        // human-in-the-loop stops the orchestrator owns.
+        // Full causal-powers set: the orchestrator is equipped to do any
+        // analysis step itself so it never hits a deny wall and can handle
+        // entangled work inline. Delegation stays the DEFAULT (see the
+        // orchestrator append) — having a skill is not a reason to do the work
+        // here when a clean brief to @fixer/@oracle would do.
         "skills": [
           "question-framing",
           "using-causal-powers",
@@ -35,7 +34,12 @@
           "descriptive-evidence",
           "analysis-checkpoints",
           "result-verification",
-          "analysis-review"
+          "analysis-review",
+          "data-preparation",
+          "data-contracts",
+          "analysis-craft",
+          "wrong-number-debugging",
+          "project-organization"
         ]
       },
       "oracle": {
@@ -65,13 +69,22 @@
         "model": "openai/gpt-5.5",
         "variant": "xhigh",
         "mcps": [],
+        // Execution lane — same model as the orchestrator, so it must carry the
+        // execution discipline to match its depth on a delegated task. Added
+        // data-contracts (join/cardinality/silent-failure guards), analysis-craft
+        // (surgical minimal code), and wrong-number-debugging so a delegated step
+        // is not shallower than one done inline.
         "skills": [
           "data-preparation",
+          "data-contracts",
+          "analysis-craft",
+          "wrong-number-debugging",
           "descriptive-evidence",
           "executing-analysis-plans",
           "predictive-modeling",
           "causal-identification",
-          "structural-estimation"
+          "structural-estimation",
+          "just-enough"
         ]
       },
       "explorer": {
