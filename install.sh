@@ -49,6 +49,15 @@ else
 fi
 
 echo
+# Drift guard (warn-only): does the live config still match the repo preset
+# template on skills/variant/mcps? Reconcile if it reports DRIFT.
+if command -v node >/dev/null 2>&1; then
+  node "$SRC_DIR/scripts/check-preset-sync.mjs" || true
+elif command -v bun >/dev/null 2>&1; then
+  bun "$SRC_DIR/scripts/check-preset-sync.mjs" || true
+fi
+
+echo
 echo "Requirements: stock oh-my-opencode-slim + the causal-powers skills plugin"
 echo "  ( https://github.com/lancegui/causal-powers )."
 echo "Then restart OpenCode — plugins, prompts, and presets load at session start only."
