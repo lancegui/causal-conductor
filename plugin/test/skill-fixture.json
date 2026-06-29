@@ -1,0 +1,678 @@
+[
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "using-causal-powers"
+},
+"output": "<skill_content name=\"using-causal-powers\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "using-causal-powers",
+"dir": "/skills/using-causal-powers",
+"truncated": false
+},
+"title": "Loaded skill: using-causal-powers"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "question-framing"
+},
+"output": "<skill_content name=\"question-framing\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "question-framing",
+"dir": "/skills/question-framing",
+"truncated": false
+},
+"title": "Loaded skill: question-framing"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "causal-identification"
+},
+"output": "<skill_content name=\"causal-identification\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "causal-identification",
+"dir": "/skills/causal-identification",
+"truncated": false
+},
+"title": "Loaded skill: causal-identification"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "pre-analysis-plan"
+},
+"output": "<skill_content name=\"pre-analysis-plan\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "pre-analysis-plan",
+"dir": "/skills/pre-analysis-plan",
+"truncated": false
+},
+"title": "Loaded skill: pre-analysis-plan"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "data-contracts"
+},
+"output": "<skill_content name=\"data-contracts\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "data-contracts",
+"dir": "/skills/data-contracts",
+"truncated": false
+},
+"title": "Loaded skill: data-contracts"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "executing-analysis-plans"
+},
+"output": "<skill_content name=\"executing-analysis-plans\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "executing-analysis-plans",
+"dir": "/skills/executing-analysis-plans",
+"truncated": false
+},
+"title": "Loaded skill: executing-analysis-plans"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "analysis-craft"
+},
+"output": "<skill_content name=\"analysis-craft\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "analysis-craft",
+"dir": "/skills/analysis-craft",
+"truncated": false
+},
+"title": "Loaded skill: analysis-craft"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "analysis-checkpoints"
+},
+"output": "<skill_content name=\"analysis-checkpoints\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "analysis-checkpoints",
+"dir": "/skills/analysis-checkpoints",
+"truncated": false
+},
+"title": "Loaded skill: analysis-checkpoints"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "result-verification"
+},
+"output": "<skill_content name=\"result-verification\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "result-verification",
+"dir": "/skills/result-verification",
+"truncated": false
+},
+"title": "Loaded skill: result-verification"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "data-preparation"
+},
+"output": "<skill_content name=\"data-preparation\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "data-preparation",
+"dir": "/skills/data-preparation",
+"truncated": false
+},
+"title": "Loaded skill: data-preparation"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "analysis-review"
+},
+"output": "<skill_content name=\"analysis-review\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "analysis-review",
+"dir": "/skills/analysis-review",
+"truncated": false
+},
+"title": "Loaded skill: analysis-review"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "project-organization"
+},
+"output": "<skill_content name=\"project-organization\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "project-organization",
+"dir": "/skills/project-organization",
+"truncated": false
+},
+"title": "Loaded skill: project-organization"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "using-causal-powers"
+},
+"output": "<skill_content name=\"using-causal-powers\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "using-causal-powers",
+"dir": "/skills/using-causal-powers",
+"truncated": false
+},
+"title": "Loaded skill: using-causal-powers"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "question-framing"
+},
+"output": "<skill_content name=\"question-framing\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "question-framing",
+"dir": "/skills/question-framing",
+"truncated": false
+},
+"title": "Loaded skill: question-framing"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "descriptive-evidence"
+},
+"output": "<skill_content name=\"descriptive-evidence\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "descriptive-evidence",
+"dir": "/skills/descriptive-evidence",
+"truncated": false
+},
+"title": "Loaded skill: descriptive-evidence"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "data-contracts"
+},
+"output": "<skill_content name=\"data-contracts\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "data-contracts",
+"dir": "/skills/data-contracts",
+"truncated": false
+},
+"title": "Loaded skill: data-contracts"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "analysis-craft"
+},
+"output": "<skill_content name=\"analysis-craft\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "analysis-craft",
+"dir": "/skills/analysis-craft",
+"truncated": false
+},
+"title": "Loaded skill: analysis-craft"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "executing-analysis-plans"
+},
+"output": "<skill_content name=\"executing-analysis-plans\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "executing-analysis-plans",
+"dir": "/skills/executing-analysis-plans",
+"truncated": false
+},
+"title": "Loaded skill: executing-analysis-plans"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "result-verification"
+},
+"output": "<skill_content name=\"result-verification\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "result-verification",
+"dir": "/skills/result-verification",
+"truncated": false
+},
+"title": "Loaded skill: result-verification"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "analysis-checkpoints"
+},
+"output": "<skill_content name=\"analysis-checkpoints\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "analysis-checkpoints",
+"dir": "/skills/analysis-checkpoints",
+"truncated": false
+},
+"title": "Loaded skill: analysis-checkpoints"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "using-causal-powers"
+},
+"output": "<skill_content name=\"using-causal-powers\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "using-causal-powers",
+"dir": "/skills/using-causal-powers",
+"truncated": false
+},
+"title": "Loaded skill: using-causal-powers"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "question-framing"
+},
+"output": "<skill_content name=\"question-framing\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "question-framing",
+"dir": "/skills/question-framing",
+"truncated": false
+},
+"title": "Loaded skill: question-framing"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "descriptive-evidence"
+},
+"output": "<skill_content name=\"descriptive-evidence\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "descriptive-evidence",
+"dir": "/skills/descriptive-evidence",
+"truncated": false
+},
+"title": "Loaded skill: descriptive-evidence"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "data-contracts"
+},
+"output": "<skill_content name=\"data-contracts\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "data-contracts",
+"dir": "/skills/data-contracts",
+"truncated": false
+},
+"title": "Loaded skill: data-contracts"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "analysis-craft"
+},
+"output": "<skill_content name=\"analysis-craft\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "analysis-craft",
+"dir": "/skills/analysis-craft",
+"truncated": false
+},
+"title": "Loaded skill: analysis-craft"
+}
+}
+]
+},
+{
+"info": {
+"role": "assistant",
+"agent": "orchestrator"
+},
+"parts": [
+{
+"type": "tool",
+"tool": "skill",
+"callID": "call_synthetic",
+"state": {
+"status": "completed",
+"input": {
+"name": "analysis-checkpoints"
+},
+"output": "<skill_content name=\"analysis-checkpoints\">synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. synthetic skill body for tests. </skill_content>",
+"metadata": {
+"name": "analysis-checkpoints",
+"dir": "/skills/analysis-checkpoints",
+"truncated": false
+},
+"title": "Loaded skill: analysis-checkpoints"
+}
+}
+]
+}
+]

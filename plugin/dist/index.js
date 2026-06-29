@@ -176,8 +176,8 @@ var MUTATING_SHELL_PATTERNS = [
   /(?:^|[;&|]\s*)(?:npm|pnpm|yarn|bun)\s+(?:install|add|remove|update|upgrade)\b/,
   /(?:^|[^<>])(?:>>?|&>|2>|1>)\s*(?!&)(?!\/dev\/(?:null|stdout|stderr)\b)\S+/
 ];
-var SPINE_CONTRACT_REMINDER = "<internal_reminder>Contract spine: no approved contract is active. Read, inspect, and ask questions as needed. Before editing files, propose a short <spine_contract> with Goal, Scope, Out of scope, and Acceptance check, then wait for explicit user approval.</internal_reminder>";
-var SPINE_IMPLEMENT_REMINDER = "<internal_reminder>Contract spine: an approved contract is active. Keep edits inside that contract. Before claiming completion, verify the work semantically against the contract AND confirm every named deliverable (file, figure, table, output) actually exists on disk — list/stat the paths and check they are non-empty; do not infer existence from a clean run. When outputs contain words like fail, error, skipped, or diagnostic, inspect the check detail and surrounding memo before deciding whether it is a blocker; do not turn an expected diagnostic, skipped optional path, feasibility gate, or known limitation into new work unless the contract includes repairing it. Emit <spine_verified>passed</spine_verified> only after both the semantic check and the on-disk deliverable check pass.</internal_reminder>";
+var SPINE_CONTRACT_REMINDER = "<internal_reminder>Contract spine: no approved contract is active. Read, inspect, and ask questions as needed. Before editing files, propose a short <spine_contract> with Goal, Scope, Out of scope, Acceptance check, and Plausibility threats (for any number the contract produces, at least one validity check that could show it is computed right yet means the wrong thing), then wait for explicit user approval.</internal_reminder>";
+var SPINE_IMPLEMENT_REMINDER = "<internal_reminder>Contract spine: an approved contract is active. Keep edits inside that contract. Before claiming completion, verify the work semantically against the contract AND confirm every named deliverable (file, figure, table, output) actually exists on disk — list/stat the paths and check they are non-empty; do not infer existence from a clean run. When outputs contain words like fail, error, skipped, or diagnostic, inspect the check detail and surrounding memo before deciding whether it is a blocker; do not turn an expected diagnostic, skipped optional path, feasibility gate, or known limitation into new work unless the contract includes repairing it. A clean run that reconciles and reproduces is reliability, not validity: for any headline number, confirm at least one plausibility/validity check (a known-shock discontinuity, an external benchmark, or a wider-definition coverage cut, per result-verification and descriptive-evidence) was run or explicitly waived by the user, since a number computed correctly can still measure the wrong thing. Emit <spine_verified>passed</spine_verified> only after the semantic check, the on-disk deliverable check, and the plausibility check pass.</internal_reminder>";
 var SPINE_FINISH_REMINDER = "<internal_reminder>Contract spine: the approved contract has been verified. A final response may summarize the outcome, checks, and any remaining risk concisely.</internal_reminder>";
 function textParts(message) {
   return message.parts.filter((part) => part.type === "text" && typeof part.text === "string").map((part) => part.text ?? "");
@@ -569,6 +569,154 @@ function createSpineHook(options = {}) {
   };
 }
 
+// src/skill-suppressor.ts
+var KILL_SWITCH = "CAUSAL_CONDUCTOR_SUPPRESS_SKILLS_DISABLED";
+function stubOutput(name) {
+  return `<skill_content name="${name}">` + `[${name} already loaded earlier this session — re-apply it from memory and ` + `say so; full body withheld to save context. It reloads automatically after ` + `a compaction.]` + `</skill_content>`;
+}
+function normalizeSkillName(name) {
+  const bare = name.includes(":") ? name.split(":").pop() ?? name : name;
+  return bare.trim().toLowerCase();
+}
+function skillState(part) {
+  if (part.type !== "tool" || part.tool !== "skill") {
+    return;
+  }
+  const state = part.state;
+  if (!state || typeof state !== "object") {
+    return;
+  }
+  const st = state;
+  if (st.status !== "completed" || typeof st.output !== "string") {
+    return;
+  }
+  return st;
+}
+function skillNameOf(st) {
+  const raw = st.input?.name ?? st.metadata?.name;
+  return typeof raw === "string" && raw.length > 0 ? normalizeSkillName(raw) : undefined;
+}
+function dedupeSkillBodies(messages) {
+  if (process.env[KILL_SWITCH]) {
+    return 0;
+  }
+  const seen = new Set;
+  let stubbed = 0;
+  for (const message of messages) {
+    if (!Array.isArray(message?.parts)) {
+      continue;
+    }
+    for (const part of message.parts) {
+      const st = skillState(part);
+      if (!st) {
+        continue;
+      }
+      const name = skillNameOf(st);
+      if (!name) {
+        continue;
+      }
+      if (!seen.has(name)) {
+        seen.add(name);
+        continue;
+      }
+      const stub = stubOutput(name);
+      if (st.output && st.output.length > stub.length) {
+        st.output = stub;
+        stubbed += 1;
+      }
+    }
+  }
+  return stubbed;
+}
+
+// src/explorer-nudge.ts
+var KILL = "CAUSAL_CONDUCTOR_EXPLORER_NUDGE_DISABLED";
+var THRESHOLD_ENV = "CAUSAL_CONDUCTOR_EXPLORER_NUDGE_THRESHOLD";
+function nudgeThreshold() {
+  const raw = process.env[THRESHOLD_ENV];
+  const n = raw ? Number.parseInt(raw, 10) : Number.NaN;
+  return Number.isFinite(n) && n > 0 ? n : 5;
+}
+var BROAD_BASH_PATTERNS = [
+  /^\s*find\b/,
+  /^\s*tree\b/,
+  /^\s*ls\b[^|;&]*\s-\S*R/,
+  /^\s*e?grep\b[^|;&]*\s-\S*[rR]/,
+  /^\s*(rg|ag|ack)\b/,
+  /\bsqlite_master\b/,
+  /(?:^|["'\s])\.(schema|tables)\b/
+];
+function isBroadDiscoveryBash(command) {
+  if (typeof command !== "string") {
+    return false;
+  }
+  return BROAD_BASH_PATTERNS.some((re) => re.test(command));
+}
+function isFullFileRead(tool, args) {
+  if (tool !== "read") {
+    return false;
+  }
+  if (!args) {
+    return true;
+  }
+  return args.offset == null && args.limit == null;
+}
+function nudgeText(ops) {
+  return `<system-reminder>
+` + `causal-conductor: you've run ${ops}+ broad discovery operations (full-file ` + "reads / recursive searches / sweeps) inline this session. Route FURTHER " + "discovery — broad reads, find/grep/rg sweeps, schema dumps — through " + "@explorer so the raw output stays out of your context; act on the " + "compressed map it returns. Targeted ops you already know you need stay " + `inline. (This is a one-time reminder.)
+` + "</system-reminder>";
+}
+function createExplorerNudge() {
+  const sessions = new Map;
+  function get(sessionID) {
+    let s = sessions.get(sessionID);
+    if (!s) {
+      s = { ops: 0, delivered: false };
+      sessions.set(sessionID, s);
+    }
+    return s;
+  }
+  return {
+    record(sessionID, tool, args) {
+      if (process.env[KILL] || !sessionID) {
+        return;
+      }
+      const command = args?.command;
+      const broad = tool === "bash" && isBroadDiscoveryBash(command) || isFullFileRead(tool, args);
+      if (broad) {
+        get(sessionID).ops += 1;
+      }
+    },
+    take(sessionID) {
+      if (process.env[KILL] || !sessionID) {
+        return null;
+      }
+      const s = sessions.get(sessionID);
+      if (!s || s.delivered || s.ops < nudgeThreshold()) {
+        return null;
+      }
+      s.delivered = true;
+      return nudgeText(s.ops);
+    },
+    reset(sessionID) {
+      sessions.delete(sessionID);
+    },
+    ops(sessionID) {
+      return sessions.get(sessionID)?.ops ?? 0;
+    }
+  };
+}
+function injectNudge(messages, text) {
+  for (let i = messages.length - 1;i >= 0; i -= 1) {
+    const m = messages[i];
+    if (m?.info?.role === "user" && Array.isArray(m.parts)) {
+      m.parts.push({ type: "text", text });
+      return true;
+    }
+  }
+  return false;
+}
+
 // src/index.ts
 var GATED_AGENT = process.env.CAUSAL_CONDUCTOR_GATED_AGENT ?? "orchestrator";
 function resolveSpineDir() {
@@ -580,6 +728,8 @@ function resolveSpineDir() {
 }
 var CausalConductorSpine = async () => {
   const sessionAgent = new Map;
+  const nudge = createExplorerNudge();
+  const isOrchestrator = (sessionID) => typeof sessionID === "string" && sessionAgent.get(sessionID) === GATED_AGENT;
   const spine = createSpineHook({
     enabled: true,
     shouldManageSession: (sessionID) => sessionAgent.get(sessionID) === GATED_AGENT,
@@ -596,9 +746,18 @@ var CausalConductorSpine = async () => {
     },
     event: async (input) => {
       await spine.event(input);
+      const ev = input.event;
+      if (ev?.type && /compact/i.test(ev.type) && ev.properties?.sessionID) {
+        nudge.reset(ev.properties.sessionID);
+      }
     },
     "tool.execute.before": async (input, output) => {
       await spine["tool.execute.before"](input, output);
+      const { tool, sessionID } = input;
+      if (isOrchestrator(sessionID)) {
+        const args = output.args;
+        nudge.record(sessionID, tool, args);
+      }
     },
     "tool.execute.after": async (input, output) => {
       await spine["tool.execute.after"](input, output);
@@ -608,6 +767,23 @@ var CausalConductorSpine = async () => {
     },
     "experimental.chat.messages.transform": async (input, output) => {
       await spine["experimental.chat.messages.transform"](input, output);
+      const messages = output.messages;
+      if (Array.isArray(messages)) {
+        const stubbed = dedupeSkillBodies(messages);
+        if (stubbed > 0 && process.env.CAUSAL_CONDUCTOR_SUPPRESS_DEBUG) {
+          console.error(`[causal-conductor] skill-suppressor: stubbed ${stubbed} duplicate skill ${stubbed === 1 ? "body" : "bodies"} this turn`);
+        }
+        const sessionID = input.sessionID ?? messages.find((m) => m?.info?.role === "user")?.info?.sessionID;
+        if (isOrchestrator(sessionID)) {
+          const text = nudge.take(sessionID);
+          if (text) {
+            injectNudge(messages, text);
+            if (process.env.CAUSAL_CONDUCTOR_SUPPRESS_DEBUG) {
+              console.error("[causal-conductor] explorer-nudge: injected delegation reminder");
+            }
+          }
+        }
+      }
     }
   };
 };
