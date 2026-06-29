@@ -17,7 +17,7 @@
       "orchestrator": {
         "model": "openai/gpt-5.5",
         "variant": "xhigh",
-        "mcps": [],
+        "mcps": ["codegraph"],
         // Full causal-powers set so the orchestrator UNDERSTANDS every
         // discipline well enough to plan, write deep briefs, and verify — not so
         // it does execution itself. Delegation (fan out to parallel @fixer /
@@ -45,7 +45,7 @@
       "oracle": {
         "model": "deepseek/deepseek-v4-pro",
         "variant": "max",
-        "mcps": [],
+        "mcps": ["codegraph"],
         "skills": [
           "analysis-checkpoints",
           "analysis-craft",
@@ -69,7 +69,7 @@
       "fixer": {
         "model": "openai/gpt-5.5",
         "variant": "medium",
-        "mcps": [],
+        "mcps": ["codegraph"],
         // Execution lane — same model as the orchestrator, so it must carry the
         // execution discipline to match its depth on a delegated task. Added
         // data-contracts (join/cardinality/silent-failure guards), analysis-craft

@@ -51,9 +51,12 @@ Goal:
 Scope:
 Out of scope:
 Acceptance check:
+Plausibility threats:
 </spine_contract>
 
 Then ask for approval and stop.
+
+**Plausibility threats** is the propose-lane. Whenever the contract produces or revises a *number*, list at least one way that number could be computed correctly yet still mean the wrong thing — and the validity check that would catch it (a known-shock discontinuity, an external benchmark, a wider-definition coverage cut). Fill it even when the user did not ask: proposing a falsification is cheap and reversible, and it is the half of the work the spine otherwise suppresses. What *counts* as a validity check is the loaded discipline's call — see `result-verification` (reliability vs validity) and `descriptive-evidence` (plausibility triangulation); do not re-derive the econ content here. For a contract that produces no number (a refactor, a file move, a config change), write `Plausibility threats: none (no number produced)`.
 
 Approval must be explicit. Valid approval includes clear replies such as:
 
@@ -85,6 +88,8 @@ When a guard or tool rejects an action:
 ## Verification Requirement
 
 Before claiming completion, compare the actual work against the approved contract.
+
+A clean run that reconciles and reproduces is **reliability**, not **validity** — it proves the number was computed correctly, not that it measures what the contract named. Before emitting the marker, confirm the contract's `Plausibility threats` were addressed: each listed validity check was run, or the user explicitly waived it. A headline number that cleared every computational check but no validity check is **not** verified — route the open threat to `@oracle` or back to the user; do not certify it. (Contracts that produce no number clear this trivially.)
 
 If verification passes, include this exact marker before the final summary:
 
